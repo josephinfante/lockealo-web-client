@@ -44,7 +44,11 @@ const OTPForm = () => {
 				console.log(res.data)
 				toast.success(res.data.message)
 			})
-			.catch((err) => toast.error(err.response.data.message))
+			.catch((err) => {
+				toast.error(err.response.data.message)
+				setTimer(null)
+				setIsButtonDisabled(false)
+			})
 	}
 
 	useEffect(() => {
