@@ -41,7 +41,6 @@ const OTPForm = () => {
 	const resendOTP = async () => {
 		await HOST.get('/api/user/otp')
 			.then((res) => {
-				console.log(res.data)
 				toast.success(res.data.message)
 			})
 			.catch((err) => {
@@ -64,6 +63,8 @@ const OTPForm = () => {
 				// If more than 60 seconds have passed, clear the saved time
 				localStorage.removeItem('otp-timer')
 			}
+		} else {
+			handleRequestAgain()
 		}
 	}, [])
 
