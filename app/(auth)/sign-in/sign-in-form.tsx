@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Skeleton } from '@/components/ui/skeleton'
 import { HOST } from '@/lib/axios'
 import { useUser } from '@/store/user-store'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -22,7 +23,7 @@ const formSchema = z.object({
 	}),
 })
 
-const SignInForm = () => {
+export const SignInForm = () => {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 	const redirectTo = searchParams?.get('redirectTo') || 'dashboard'
@@ -108,4 +109,22 @@ const SignInForm = () => {
 	)
 }
 
-export default SignInForm
+export const SignInFormSkeleton = () => {
+	return (
+		<div className="w-full flex flex-col gap-4">
+			<div className="space-y-2">
+				<label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+					Email
+				</label>
+				<Skeleton className="flex h-9 w-full rounded-md border" />
+			</div>
+			<div className="space-y-2">
+				<label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+					Password
+				</label>
+				<Skeleton className="flex h-9 w-full rounded-md border" />
+			</div>
+			<Skeleton className="flex h-9 w-full rounded-md border mt-4" />
+		</div>
+	)
+}
